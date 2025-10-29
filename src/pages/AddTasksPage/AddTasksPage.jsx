@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './add-tasks-page.css'
 import { useState } from 'react';
-import WeeklyTasksComponent from '../StartPage/components/WeeklyTasksComponent';
 import {addTask, deleteAllTasks} from "../../features/tasksSlice.js"
+import AddTasksDisplayTasksComponent from '../StartPage/components/AddTasksDisplayTasksComponent.jsx';
 
 function AddTasksPage() {
 
@@ -23,12 +23,11 @@ function AddTasksPage() {
 
     return(
         <section className='addTasksPage'>
-            {/* <h1>Add new tasks</h1> */}
             <h1>Lägg till nya todos</h1>
 
-            <input 
+            <article className='addTaskCreateContainer'>
+                <input 
                 type="text" 
-                // placeholder='Task name'
                 placeholder='Todo'
                 value={inputTaskName}
                 onChange={(event) => {
@@ -36,25 +35,23 @@ function AddTasksPage() {
                     const capitalised = value.charAt(0).toUpperCase() + value.slice(1);
                     setInputTaskName(capitalised)
                 }}
-            />
+                />
 
-            <button onClick={() => addNewTask(inputTaskName)} className="addTaskAddBtn">
-                {/* Add */}
-                Lägg till
-            </button>
-
-            {/* <p className='addTaskPExistingTasks'>Existing tasks</p> */}
+                <button onClick={() => addNewTask(inputTaskName)} className="addTaskAddBtn">
+                    +
+                </button>
+            </article>
+            
             <p className='addTaskPExistingTasks'>Existerande todos</p>
 
             <section className='addTaskExistingTasks'>
                 {userTasks.map((task) => (
-                    <WeeklyTasksComponent key={task.id} task={task} />
+                    <AddTasksDisplayTasksComponent key={task.id} task={task} />
                 ))}
             </section>
             
             {userTasks.length > 0 &&
                 <button className="addTasksDeleteAllTasksBtn" onClick={() => dispatch(deleteAllTasks())}>
-                    {/* Delete all tasks */}
                     Radera alla todos
                 </button>
             }

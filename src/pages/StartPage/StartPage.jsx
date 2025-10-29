@@ -20,7 +20,6 @@ function StartPage() {
 
     return(
         <section className='startPage'>
-            {/* <h1>This week's tasks</h1> */}
             <h1>Denna veckas todos</h1>
 
             {userTasks.length > 0 
@@ -30,7 +29,6 @@ function StartPage() {
                 <p>Du har inga todos.</p>
             }
             
-
             <section className='startPageExistingTasks'>
                 {userTasks.map((task) => (
                     <WeeklyTasksComponent key={task.id} task={task} />
@@ -40,11 +38,9 @@ function StartPage() {
             {userTasks.length > 0 &&
                 <section className='startPageButtons'>
                 <button className="startPageBtnUnmarkAll" onClick={() => dispatch(unmarkAllTasks())}>
-                    {/* Unmark all */}
                     Avmarkera alla
                 </button>
                 <button className="startPageBtnMarkAll" onClick={() => dispatch(markAllTasks())}>
-                    {/* Mark all */}
                     Markera alla
                 </button>
             </section>

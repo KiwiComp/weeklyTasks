@@ -29,14 +29,15 @@ h1 {
     padding: 0.5rem;
     width: 7rem;
     border-radius: 0.3rem;
-    border: 1px solid gray;
-    color: white;
+    border: 1px solid rgb(213, 213, 213);
 }
 
 .startPageBtnUnmarkAll {
-    background-color: rgb(87, 125, 87);
+    background-color: rgb(210, 210, 210);
+    color: rgb(71, 71, 71);
 }
 
 .startPageBtnMarkAll {
-    background-color: rgb(206, 143, 36);
+    background-color: rgb(71, 71, 71);
+    color: rgb(210, 210, 210);
 }
