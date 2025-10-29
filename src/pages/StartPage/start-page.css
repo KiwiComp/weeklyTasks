@@ -1,0 +1,42 @@
+
+h1 {
+    color: black;
+}
+
+.startPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.startPageExistingTasks {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.startPageButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.startPageButtons button {
+    padding: 0.5rem;
+    width: 7rem;
+    border-radius: 0.3rem;
+    border: 1px solid gray;
+    color: white;
+}
+
+.startPageBtnUnmarkAll {
+    background-color: rgb(87, 125, 87);
+}
+
+.startPageBtnMarkAll {
+    background-color: rgb(206, 143, 36);
+}

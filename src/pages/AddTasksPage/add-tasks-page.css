@@ -1,0 +1,49 @@
+
+
+.addTasksPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.addTasksPage h1 {
+    margin-bottom: 1rem;
+}
+
+.addTasksPage input {
+    padding: 0.4rem;
+    font-size: 1.2rem;
+}
+
+.addTasksPage button {
+    font-size: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border-radius: 0.3rem;
+    border: 1px solid gray;
+}
+.addTaskAddBtn {
+    background-color: rgb(81, 112, 81);
+    color: white;
+}
+
+.addTaskPExistingTasks {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+.addTaskExistingTasks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.addTasksDeleteAllTasksBtn {
+    background-color: rgb(106, 29, 29);
+    color: white;
+}

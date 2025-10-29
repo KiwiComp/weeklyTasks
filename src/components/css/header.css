@@ -1,0 +1,22 @@
+
+header {
+    background-color: rgb(218, 218, 218);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+}
+
+header a {
+    font-size: 1.6rem;
+    color: rgb(65, 65, 65);
+    /* transition: transform 0.3s ease, color 0.3s ease; */
+}
+
+header a:hover {
+  color: rgb(78, 98, 152);
+  transform: scale(1.10);
+}
+
