@@ -1,15 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
-import WeeklyTasksComponent from './components/WeeklyTasksComponent';
+import { useSelector } from 'react-redux';
 import './start-page.css'
-import { markAllTasks, unmarkAllTasks } from '../../features/tasksSlice';
 import { useEffect, useState } from 'react';
+import DisplayTasksStartPageComponent from './components/DisplayTasksStartPageComponent';
+import StartPageBtnsComponent from './components/StartPageBtnsComponent';
 
 function StartPage() {
 
     const userTasks = useSelector((state) => state.task.tasks);
-    const dispatch = useDispatch();
     const [numberOfTasks, setNumberOfTasks] = useState(0);
     const [completedTasks, setCompletedTasks] = useState(0);
+
+    const doneTasks = userTasks.filter(task => task.isDone);
+    const notDoneTasks = userTasks.filter(task => !task.isDone);
 
     useEffect(() => {
         setNumberOfTasks(userTasks.length);
@@ -28,22 +30,11 @@ function StartPage() {
                 :
                 <p>Du har inga todos.</p>
             }
-            
-            <section className='startPageExistingTasks'>
-                {userTasks.map((task) => (
-                    <WeeklyTasksComponent key={task.id} task={task} />
-                ))}
-            </section>
+
+            <DisplayTasksStartPageComponent doneTasks={doneTasks} notDoneTasks={notDoneTasks}/>
 
             {userTasks.length > 0 &&
-                <section className='startPageButtons'>
-                <button className="startPageBtnUnmarkAll" onClick={() => dispatch(unmarkAllTasks())}>
-                    Avmarkera alla
-                </button>
-                <button className="startPageBtnMarkAll" onClick={() => dispatch(markAllTasks())}>
-                    Markera alla
-                </button>
-            </section>
+            <StartPageBtnsComponent />
             }
             
         </section>

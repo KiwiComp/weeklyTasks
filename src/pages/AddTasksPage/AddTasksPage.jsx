@@ -23,7 +23,7 @@ function AddTasksPage() {
 
     return(
         <section className='addTasksPage'>
-            <h1>Lägg till nya todos</h1>
+            <h1>Redigera todos</h1>
 
             <article className='addTaskCreateContainer'>
                 <input 
@@ -45,8 +45,10 @@ function AddTasksPage() {
             <p className='addTaskPExistingTasks'>Existerande todos</p>
 
             <section className='addTaskExistingTasks'>
-                {userTasks.map((task) => (
-                    <AddTasksDisplayTasksComponent key={task.id} task={task} />
+                {[...userTasks]
+                    .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
+                    .map((task) => (
+                        <AddTasksDisplayTasksComponent key={task.id} task={task} />
                 ))}
             </section>
             

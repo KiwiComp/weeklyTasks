@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 
-// Skapa funktion för att hämta tasks från local storage.
 const loadTasksFromLocalStorage = () => {
     try {
         const savedTasks = localStorage.getItem("tasks");
@@ -12,7 +11,6 @@ const loadTasksFromLocalStorage = () => {
     }
 }
 
-// Skapa funktion för att spara tasks till local storage.
 const saveTasksToLocalStorage = (tasks) => {
     try {
         localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -23,13 +21,8 @@ const saveTasksToLocalStorage = (tasks) => {
 
 
 const initialState = {
-    //tasks : [] = [] // Ändra detta sen till det som hämtas från local storage.
     tasks : loadTasksFromLocalStorage()
 }
-
-// TASK
-// id: crypto.randomUUID();
-// name: String
 
 const tasksSlice = createSlice({
     name: "tasks",
@@ -46,7 +39,6 @@ const tasksSlice = createSlice({
                 // Vad ska jag göra här? Skicka notis om att det redan finns en med detta id?
             }
 
-            // Anropa funktion för att spara till local storage.
             saveTasksToLocalStorage(state.tasks);
         },
 
@@ -58,7 +50,6 @@ const tasksSlice = createSlice({
                 state.tasks = state.tasks.filter(task => task.id !== existingTask.id);
             }
 
-            // Anropa funktion som sparar till local storage.
             saveTasksToLocalStorage(state.tasks);
         },
 

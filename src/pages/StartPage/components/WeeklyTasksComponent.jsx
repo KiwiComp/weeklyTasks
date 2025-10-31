@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare } from '@fortawesome/free-solid-svg-icons';
 import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
+import { toggleDone } from '../../../features/tasksSlice.js';
 
 function WeeklyTasksComponent({task}) {
     const dispatch = useDispatch()
 
     return(
-        <section className="displayWeeklyTasks">
+        <section className={`displayWeeklyTasks ${task.isDone ? 'displayDoneWeeklyTasks' : 'displayNotDoneWeeklyTasks'}`}>
 
             <article className='singleTask'>
 

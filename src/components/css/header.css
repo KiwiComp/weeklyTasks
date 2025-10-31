@@ -11,12 +11,17 @@ header {
 
 header a {
     font-size: 1.6rem;
-    color: rgb(65, 65, 65);
-    /* transition: transform 0.3s ease, color 0.3s ease; */
+    /* color: rgb(65, 65, 65); */
+    color: rgb(152, 152, 152);
 }
 
 header a:hover {
-  color: rgb(78, 98, 152);
+  /* color: rgb(223, 171, 49); */
+  color: rgb(78, 78, 78);
   transform: scale(1.10);
+}
+
+.iconHome {
+  font-size: 2.6rem;
 }
 
