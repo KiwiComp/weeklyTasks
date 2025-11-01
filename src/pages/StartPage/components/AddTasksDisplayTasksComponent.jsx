@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { deleteTask } from '../../../features/tasksSlice';
 import './css/weekly-tasks-component.css'
 
-function AddTasksDisplayTasksComponent({task}) {
+function AddTasksDisplayTasksComponent({task, onEdit, disableButtons}) {
     const dispatch = useDispatch();
 
     return(
@@ -17,7 +17,16 @@ function AddTasksDisplayTasksComponent({task}) {
                 </article>
 
                 <article className='singleTaskRight'>
-                    <FontAwesomeIcon onClick={() => dispatch(deleteTask(task))} icon={faTrashCan} className='iconTrashCan'/>
+                    <FontAwesomeIcon 
+                        onClick={() => !disableButtons && onEdit(task)} 
+                        icon={faPenToSquare} 
+                        className='iconEdit'
+                    />
+                    <FontAwesomeIcon 
+                        onClick={() => !disableButtons && dispatch(deleteTask(task))} 
+                        icon={faTrashCan} 
+                        className='iconTrashCan'
+                    />
                 </article>
 
             </article>

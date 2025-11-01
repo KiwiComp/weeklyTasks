@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './add-tasks-page.css'
 import { useState } from 'react';
-import {addTask, deleteAllTasks} from "../../features/tasksSlice.js"
+import {addTask, deleteAllTasks, editTask} from "../../features/tasksSlice.js"
 import AddTasksDisplayTasksComponent from '../StartPage/components/AddTasksDisplayTasksComponent.jsx';
 import Toast from '../../components/Toast.jsx';
+import EditToast from '../../components/EditToast.jsx';
 
 function AddTasksPage() {
 
@@ -11,6 +12,9 @@ function AddTasksPage() {
     const userTasks = useSelector((state) => state.task.tasks)
     const [inputTaskName, setInputTaskName] = useState("");
     const [showToast, setShowToast] = useState(false);
+    const [showEditToast, setShowEditToast] = useState(false);
+    const [taskToEdit, setTaskToEdit] = useState(null);
+    
 
     const addNewTask = (taskName) => {
         const newTask = {id: crypto.randomUUID(), name: taskName, isDone: false};
@@ -31,6 +35,22 @@ function AddTasksPage() {
         setShowToast(false);
     }
 
+    const handleEditTask = (task) => {
+        setTaskToEdit(task);
+        setShowEditToast(true);
+    }
+
+    const confirmEdit = (newName) => {
+        const newTask = {id: taskToEdit.id, name: newName, isDone: taskToEdit.isDone}
+        dispatch(editTask(newTask))
+        setShowEditToast(false);
+        setTaskToEdit(null);
+    }
+
+    const cancelEdit = () => {
+        setShowEditToast(false);
+    }
+
 
     return(
         <section className='addTasksPage'>
@@ -46,9 +66,10 @@ function AddTasksPage() {
                     const capitalised = value.charAt(0).toUpperCase() + value.slice(1);
                     setInputTaskName(capitalised)
                 }}
+                disabled={showToast || showEditToast}
                 />
 
-                <button onClick={() => addNewTask(inputTaskName)} className="addTaskAddBtn">
+                <button onClick={() => addNewTask(inputTaskName)} className="addTaskAddBtn" disabled={showToast || showEditToast}>
                     +
                 </button>
             </article>
@@ -59,12 +80,17 @@ function AddTasksPage() {
                 {[...userTasks]
                     .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
                     .map((task) => (
-                        <AddTasksDisplayTasksComponent key={task.id} task={task} />
+                        <AddTasksDisplayTasksComponent 
+                            key={task.id} 
+                            task={task} 
+                            onEdit={handleEditTask}
+                            disableButtons={showToast || showEditToast}
+                        />
                 ))}
             </section>
             
             {userTasks.length > 0 &&
-                 <button className="addTasksDeleteAllTasksBtn" onClick={() => setShowToast(true)}>
+                 <button className="addTasksDeleteAllTasksBtn" onClick={() => setShowToast(true)} disabled={showToast || showEditToast}>
                     Radera alla todos
                 </button>
             }
@@ -74,6 +100,14 @@ function AddTasksPage() {
                     message="Vill du verkligen radera alla todos?"
                     onYesClose={yesCloseToast} 
                     onNoClose={noCloseToast}
+                />
+            }
+
+            {showEditToast &&
+                <EditToast 
+                    task={taskToEdit}
+                    onDone={confirmEdit}
+                    onCancel={cancelEdit} 
                 />
             }
             
