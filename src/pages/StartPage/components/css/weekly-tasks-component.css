@@ -29,9 +29,19 @@
     gap: 0.8rem;
 }
 
+.singleTaskRight {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
 .checkIcons {
     font-size: 1.3rem;
     color: rgb(91, 91, 91);
+}
+
+.iconEdit {
+    color: rgb(39, 79, 39)
 }
 
 .iconTrashCan {

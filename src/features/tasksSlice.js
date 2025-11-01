@@ -53,6 +53,17 @@ const tasksSlice = createSlice({
             saveTasksToLocalStorage(state.tasks);
         },
 
+        editTask: (state, action) => {
+            const editedTask = action.payload;
+            const exisitingTask = state.tasks.find(task => task.id === editedTask.id);
+
+            if(exisitingTask) {
+                exisitingTask.name = editedTask.name;
+            }
+
+            saveTasksToLocalStorage(state.tasks);
+        },
+
         deleteAllTasks: (state) => {
             state.tasks = [];
             saveTasksToLocalStorage(state.tasks);
@@ -87,5 +98,5 @@ const tasksSlice = createSlice({
     }
 })
 
-export const {addTask, deleteTask, toggleDone, markAllTasks, unmarkAllTasks, deleteAllTasks} = tasksSlice.actions;
+export const {addTask, deleteTask, toggleDone, markAllTasks, unmarkAllTasks, deleteAllTasks, editTask} = tasksSlice.actions;
 export default tasksSlice.reducer;

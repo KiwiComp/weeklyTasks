@@ -1,6 +1,6 @@
 
 
-.toast {
+.toast, .editToast {
   position: fixed;
   width: 80%;
   height: 22%;
@@ -9,11 +9,18 @@
   transform: translateX(-50%);
   background: #333;
   color: white;
-  padding: 3rem;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   animation: fadeIn 0.3s ease;
   z-index: 1000;
+}
+
+.toast {
+  padding: 3rem;
+}
+
+.editToast {
+  padding-top: 3rem;
 }
 
 @keyframes fadeIn {
@@ -28,6 +35,12 @@
   text-align: center;
   gap: 0.5rem;
   font-size: 1.2rem;
+  align-items: center;
+  width: 100%;
+}
+
+.editField {
+  width: 15rem;
 }
 
 .toastBtns {
@@ -47,10 +60,20 @@
   font-size: 1.2rem;
 }
 
-.toastYesBtn {
+.editToast button {
+  border: none;
+  width: 5rem;
+  height: 2rem;
+  margin-top: 1rem;
+  color: rgb(255, 255, 255);
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+}
+
+.toastYesBtn, .editToastConfirmBtn {
   background-color: rgb(90, 133, 90);
 }
 
-.toastNoBtn {
+.toastNoBtn, .editToastCancelBtn {
   background-color: rgb(137, 45, 45);
 }
