@@ -3,12 +3,14 @@ import './add-tasks-page.css'
 import { useState } from 'react';
 import {addTask, deleteAllTasks} from "../../features/tasksSlice.js"
 import AddTasksDisplayTasksComponent from '../StartPage/components/AddTasksDisplayTasksComponent.jsx';
+import Toast from '../../components/Toast.jsx';
 
 function AddTasksPage() {
 
     const dispatch = useDispatch();
     const userTasks = useSelector((state) => state.task.tasks)
     const [inputTaskName, setInputTaskName] = useState("");
+    const [showToast, setShowToast] = useState(false);
 
     const addNewTask = (taskName) => {
         const newTask = {id: crypto.randomUUID(), name: taskName, isDone: false};
@@ -18,6 +20,15 @@ function AddTasksPage() {
 
     const reset = () => {
         setInputTaskName("");
+    }
+
+    const yesCloseToast = () => {
+        dispatch(deleteAllTasks())
+        setShowToast(false);
+    }
+
+    const noCloseToast = () => {
+        setShowToast(false);
     }
 
 
@@ -53,9 +64,17 @@ function AddTasksPage() {
             </section>
             
             {userTasks.length > 0 &&
-                <button className="addTasksDeleteAllTasksBtn" onClick={() => dispatch(deleteAllTasks())}>
+                 <button className="addTasksDeleteAllTasksBtn" onClick={() => setShowToast(true)}>
                     Radera alla todos
                 </button>
+            }
+
+            {showToast &&
+                <Toast 
+                    message="Vill du verkligen radera alla todos?"
+                    onYesClose={yesCloseToast} 
+                    onNoClose={noCloseToast}
+                />
             }
             
         </section>
