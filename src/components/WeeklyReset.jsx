@@ -13,7 +13,7 @@ function useWeeklyReset() {
             const today = new Date();
             const day = today.getDay(); //Söndag = 0.
 
-            if (day === 0 && lastReset !== today.toDateString()) {
+            if (day === 1 && lastReset !== today.toDateString()) {
                 dispatch(archiveWeeklyTasks());
                 localStorage.setItem("lastResetDate", today.toDateString());
             }
