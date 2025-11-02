@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { markAllTasks, unmarkAllTasks } from '../../../features/tasksSlice';
+import { unmarkAllTasks } from '../../../features/tasksSlice';
 
 
 function StartPageBtnsComponent() {

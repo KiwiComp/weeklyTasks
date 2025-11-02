@@ -9,6 +9,7 @@ import AddTasksPage from './pages/AddTasksPage/AddTasksPage.jsx'
 import { configureStore } from '@reduxjs/toolkit'
 import tasksSliceReducers from './features/tasksSlice.js'
 import { Provider } from 'react-redux'
+import ArchivePage from './pages/ArchivePage.jsx'
 
 
 const router = createHashRouter([
@@ -18,7 +19,8 @@ const router = createHashRouter([
     children: [
       {index: true, Component: StartPage},
       {path: "/calendar", Component: CalendarPage},
-      {path: "/addTask", Component: AddTasksPage}
+      {path: "/addTask", Component: AddTasksPage},
+      {path: "/archive", Component: ArchivePage}
     ]
   }
 ])

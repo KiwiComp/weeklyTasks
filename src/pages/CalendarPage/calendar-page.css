@@ -1,0 +1,40 @@
+
+.calendarPage a {
+    text-decoration: none;
+    color: black;
+}
+
+.allPreviousWeeks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.archiveSingleWeek {
+    background-color: rgb(219, 219, 219);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.3rem;    
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+}
+
+.displayArchivedTasks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 1rem;
+}
+
+.weekTitle {
+    text-align: center;
+}
+
+.pNumberOfDoneTasksArchivePage {
+    color: rgb(225, 225, 225);
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
