@@ -19,9 +19,42 @@ const saveTasksToLocalStorage = (tasks) => {
     }
 }
 
+const loadPreviousWeeksFromLocalStorage = () => {
+    try {
+        const savedTasks = localStorage.getItem("previousTasks");
+        return savedTasks ? JSON.parse(savedTasks) : [];
+    } catch (error) {
+        console.error("Could not fetch previous weeks' tasks from local storage: ", error);
+        return [];
+    }
+}
+
+const savePreviousWeeksToLocalStorage = (previousWeek) => {
+    try {
+        localStorage.setItem("previousTasks", JSON.stringify(previousWeek));
+    } catch (error) {
+        console.error("Could not save previous week's task to local storage: ", error);
+    }
+}
+
+const getWeekNumber = (date)  => {
+  const d = new Date(date.getTime());
+  d.setHours(0, 0, 0, 0);
+
+  // Justera till torsdag i samma vecka för ISO-standarden
+  d.setDate(d.getDate() + 3 - ((d.getDay() + 6) % 7));
+
+  const week1 = new Date(d.getFullYear(), 0, 4); // 4 januari är alltid i vecka 1
+  const weekNumber = 1 + Math.round(((d - week1) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);
+
+  return weekNumber;
+}
+
+
 
 const initialState = {
-    tasks : loadTasksFromLocalStorage()
+    tasks : loadTasksFromLocalStorage(),
+    tasksPreviousWeeks : loadPreviousWeeksFromLocalStorage()
 }
 
 const tasksSlice = createSlice({
@@ -123,9 +156,41 @@ const tasksSlice = createSlice({
             }
 
             saveTasksToLocalStorage(state.tasks);
+        },
+
+        archiveWeeklyTasks: (state) => {
+            const today = new Date();
+            const weekNumber = getWeekNumber(today)
+
+            const archivedWeek = {
+                weekNumber: weekNumber,
+                year: today.getFullYear(),
+                tasks: state.tasks.map(task => ({ ...task }))
+            }
+            state.tasksPreviousWeeks.push(archivedWeek);
+
+            state.tasks.map((task) => {
+                task.isDone = false
+                task.day = null
+            })
+
+            saveTasksToLocalStorage(state.tasks);
+            savePreviousWeeksToLocalStorage(state.tasksPreviousWeeks);
         }
     }
 })
 
-export const {addTask, deleteTask, toggleDone, markAllTasks, unmarkAllTasks, deleteAllTasks, editTask, addDayToTask, removeDayFromTask} = tasksSlice.actions;
+export const {
+    addTask, 
+    deleteTask, 
+    toggleDone, 
+    markAllTasks, 
+    unmarkAllTasks, 
+    deleteAllTasks, 
+    editTask, 
+    addDayToTask, 
+    removeDayFromTask, 
+    archiveWeeklyTasks
+} = tasksSlice.actions;
+
 export default tasksSlice.reducer;

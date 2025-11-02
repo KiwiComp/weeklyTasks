@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './start-page.css'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DisplayTasksStartPageComponent from './components/DisplayTasksStartPageComponent';
 import StartPageBtnsComponent from './components/StartPageBtnsComponent';
 import AddDayToast from '../../components/AddDayToast';
@@ -9,22 +9,12 @@ import { addDayToTask, removeDayFromTask, toggleDone } from '../../features/task
 function StartPage() {
 
     const dispatch = useDispatch();
-
     const userTasks = useSelector((state) => state.task.tasks);
-    const [numberOfTasks, setNumberOfTasks] = useState(0);
-    const [completedTasks, setCompletedTasks] = useState(0);
-
     const doneTasks = userTasks.filter(task => task.isDone);
     const notDoneTasks = userTasks.filter(task => !task.isDone);
-
     const [showSetDayToast, setShowSetDayToast] = useState(false);
     const [taskToAddDay, setTaskToAddDay] = useState(null);
 
-    useEffect(() => {
-        setNumberOfTasks(userTasks.length);
-        const completedTasks = userTasks.filter(task => task.isDone)
-        setCompletedTasks(completedTasks.length)
-    }, [userTasks])
 
 
     const handleCheckToggle = (task) => {
@@ -60,19 +50,27 @@ function StartPage() {
 
             {userTasks.length > 0 
                 ? 
-                <p>Avklarat: {completedTasks}/{numberOfTasks}.</p>
+                <p>Avklarat: {doneTasks.length}/{userTasks.length}.</p>
                 :
                 <p>Du har inga todos.</p>
             }
 
-            <DisplayTasksStartPageComponent doneTasks={doneTasks} notDoneTasks={notDoneTasks} onCheckToggle={handleCheckToggle}/>
+            <DisplayTasksStartPageComponent 
+                doneTasks={doneTasks} 
+                notDoneTasks={notDoneTasks} 
+                onCheckToggle={handleCheckToggle}
+            />
 
             {userTasks.length > 0 &&
-            <StartPageBtnsComponent />
+                <StartPageBtnsComponent />
             }
 
             {showSetDayToast &&
-                <AddDayToast task={taskToAddDay} onDone={addDayToCheckedTask} onCancel={cancelCheck}/>
+                <AddDayToast 
+                    task={taskToAddDay} 
+                    onDone={addDayToCheckedTask} 
+                    onCancel={cancelCheck}
+                />
             }
             
         </section>
