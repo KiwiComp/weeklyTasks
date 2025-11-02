@@ -38,3 +38,11 @@
     text-align: center;
     margin-bottom: 2rem;
 }
+
+.pNoArchivedWeeks {
+    color: rgb(235, 235, 235);
+}
+
+.calendarPageTitle {
+    text-align: center;
+}

@@ -10,7 +10,7 @@ function CalendarPage() {
 
     return(
         <section className="calendarPage">
-            <h1>Calendar page</h1>
+            <h1 className='calendarPageTitle'>Tidigare veckor</h1>
 
             <section className='allPreviousWeeks'>
                 {previousWeeks.map((week) => (
@@ -22,6 +22,10 @@ function CalendarPage() {
                     </Link>
                 ))}
             </section>
+
+            {previousWeeks.length === 0 &&
+                <p className='pNoArchivedWeeks'>Du har inga arkiverade veckor.</p>
+            }
             
         </section>
     )
