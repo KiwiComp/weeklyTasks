@@ -27,6 +27,9 @@
     height: 2.5rem;
     width: 70%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    /* DARK MODE */
+    background-color: rgb(193, 193, 193);
+    color: black;
 }
 
 .addTaskAddBtn {
@@ -45,6 +48,8 @@
 .addTaskPExistingTasks {
     font-size: 1.5rem;
     margin-top: 2rem;
+    /* DARK MODE */
+    color: gray;
 }
 
 .addTaskExistingTasks {

@@ -11,4 +11,6 @@
     flex-direction: column;
     align-items: center;
     padding-top: 2rem;
+    /* DARK MODE */
+    background-color: rgb(27, 27, 27);
 }

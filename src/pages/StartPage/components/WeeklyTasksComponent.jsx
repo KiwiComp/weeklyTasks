@@ -19,7 +19,7 @@ function WeeklyTasksComponent({task}) {
                         onClick={() => dispatch(toggleDone(task))}
                         className='checkIcons'
                     />
-                    <p>{task.name}</p>
+                    <p className='taskName'>{task.name}</p>
                 </article>
 
             </article>

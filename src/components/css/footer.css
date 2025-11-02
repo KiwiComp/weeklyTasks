@@ -1,6 +1,8 @@
 
 footer {
-    background-color: rgb(218, 218, 218);
+  /* LIGHT MODE */
+    /* background-color: rgb(218, 218, 218); */
+    background-color: rgb(19, 19, 19);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -9,4 +11,6 @@ footer {
 
 footer p {
   font-size: 0.7rem;
+  /* DARK MODE */
+  color: rgb(182, 182, 182);
 }
