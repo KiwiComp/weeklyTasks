@@ -91,12 +91,41 @@ const tasksSlice = createSlice({
         unmarkAllTasks: (state) => {
             state.tasks.map((task) => {
                 task.isDone = false
+                task.day = null
             })
+
+            saveTasksToLocalStorage(state.tasks);
+        },
+
+        addDayToTask: (state, action) => {
+            const taskToAddDay = action.payload;
+            const exisitingTask = state.tasks.find(task => task.id === taskToAddDay.id);
+            console.log("Day task to add day: " + taskToAddDay.day);
+            console.log("Day existing task: " + exisitingTask.day);
+
+            if(exisitingTask) {
+                exisitingTask.day = taskToAddDay.day;
+                console.log("Day after setting: " + exisitingTask.day);
+            }
+
+            saveTasksToLocalStorage(state.tasks);
+        },
+
+        removeDayFromTask: (state, action) => {
+            const taskToRemoveDay = action.payload;
+            const exisitingTask = state.tasks.find(task => task.id === taskToRemoveDay.id);
+            console.log("Day task to remove day: " + taskToRemoveDay.day);
+            console.log("Day existing task: " + exisitingTask.day);
+
+            if(exisitingTask) {
+                exisitingTask.day = taskToRemoveDay.day;
+                console.log("Day after setting: " + exisitingTask.day);
+            }
 
             saveTasksToLocalStorage(state.tasks);
         }
     }
 })
 
-export const {addTask, deleteTask, toggleDone, markAllTasks, unmarkAllTasks, deleteAllTasks, editTask} = tasksSlice.actions;
+export const {addTask, deleteTask, toggleDone, markAllTasks, unmarkAllTasks, deleteAllTasks, editTask, addDayToTask, removeDayFromTask} = tasksSlice.actions;
 export default tasksSlice.reducer;

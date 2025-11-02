@@ -10,9 +10,10 @@ function StartPageBtnsComponent() {
             <button className="startPageBtnUnmarkAll" onClick={() => dispatch(unmarkAllTasks())}>
                 Avmarkera alla
             </button>
-            <button className="startPageBtnMarkAll" onClick={() => dispatch(markAllTasks())}>
+            {/* Funkar inte med nya att lägga till en dag. */}
+            {/* <button className="startPageBtnMarkAll" onClick={() => dispatch(markAllTasks())}>
                 Markera alla
-            </button>
+            </button> */}
         </section>
     )
 }
