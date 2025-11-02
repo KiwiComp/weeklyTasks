@@ -1,10 +1,14 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './start-page.css'
 import { useEffect, useState } from 'react';
 import DisplayTasksStartPageComponent from './components/DisplayTasksStartPageComponent';
 import StartPageBtnsComponent from './components/StartPageBtnsComponent';
+import AddDayToast from '../../components/AddDayToast';
+import { addDayToTask, removeDayFromTask, toggleDone } from '../../features/tasksSlice';
 
 function StartPage() {
+
+    const dispatch = useDispatch();
 
     const userTasks = useSelector((state) => state.task.tasks);
     const [numberOfTasks, setNumberOfTasks] = useState(0);
@@ -13,11 +17,41 @@ function StartPage() {
     const doneTasks = userTasks.filter(task => task.isDone);
     const notDoneTasks = userTasks.filter(task => !task.isDone);
 
+    const [showSetDayToast, setShowSetDayToast] = useState(false);
+    const [taskToAddDay, setTaskToAddDay] = useState(null);
+
     useEffect(() => {
         setNumberOfTasks(userTasks.length);
         const completedTasks = userTasks.filter(task => task.isDone)
         setCompletedTasks(completedTasks.length)
     }, [userTasks])
+
+
+    const handleCheckToggle = (task) => {
+        if(!task.isDone) {
+            setTaskToAddDay(task);
+            setShowSetDayToast(true);
+        } else {
+            dispatch(toggleDone(task));
+            removeDayToCheckedTask(task);
+        }
+    }
+
+    const addDayToCheckedTask = (task, day) => {
+        const taskAddDay = {id: task.id, name: task.name, isDone: task.isDone, day: day};
+        dispatch(addDayToTask(taskAddDay));
+        dispatch(toggleDone(taskAddDay));
+        setShowSetDayToast(false);
+    }
+
+    const removeDayToCheckedTask = (task) => {
+        const removeDayTask = {id: task.id, name: task.name, isDone: task.isDone, day: null};
+        dispatch(removeDayFromTask(removeDayTask));
+    }
+
+    const cancelCheck = () => {
+        setShowSetDayToast(false);
+    }
 
 
     return(
@@ -31,10 +65,14 @@ function StartPage() {
                 <p>Du har inga todos.</p>
             }
 
-            <DisplayTasksStartPageComponent doneTasks={doneTasks} notDoneTasks={notDoneTasks}/>
+            <DisplayTasksStartPageComponent doneTasks={doneTasks} notDoneTasks={notDoneTasks} onCheckToggle={handleCheckToggle}/>
 
             {userTasks.length > 0 &&
             <StartPageBtnsComponent />
+            }
+
+            {showSetDayToast &&
+                <AddDayToast task={taskToAddDay} onDone={addDayToCheckedTask} onCancel={cancelCheck}/>
             }
             
         </section>

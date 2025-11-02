@@ -1,14 +1,14 @@
 import WeeklyTasksComponent from "./WeeklyTasksComponent";
 
 
-function DisplayTasksStartPageComponent({doneTasks, notDoneTasks}) {
+function DisplayTasksStartPageComponent({doneTasks, notDoneTasks, onCheckToggle}) {
     
     return(
         <section className='startPageExistingTasks'>
             {[...notDoneTasks]
-                .sort((a, b) => a.name.localeCompare(b.name, 'sv')) // sortera enligt svensk alfabetisk ordning
+                .sort((a, b) => a.name.localeCompare(b.name, 'sv')) 
                 .map((task) => (
-                    <WeeklyTasksComponent key={task.id} task={task} />
+                    <WeeklyTasksComponent key={task.id} task={task} onCheckToggle={() => onCheckToggle(task)}/>
                 ))
             }
 
@@ -17,9 +17,9 @@ function DisplayTasksStartPageComponent({doneTasks, notDoneTasks}) {
             )}
 
             {[...doneTasks]
-                .sort((a, b) => a.name.localeCompare(b.name, 'sv')) // sortera enligt svensk alfabetisk ordning
+                .sort((a, b) => a.name.localeCompare(b.name, 'sv')) 
                 .map((task) => (
-                    <WeeklyTasksComponent key={task.id} task={task} />
+                    <WeeklyTasksComponent key={task.id} task={task} onCheckToggle={() => onCheckToggle(task)}/>
                 ))
             }
         </section>

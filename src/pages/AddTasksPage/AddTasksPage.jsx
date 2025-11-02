@@ -17,7 +17,7 @@ function AddTasksPage() {
     
 
     const addNewTask = (taskName) => {
-        const newTask = {id: crypto.randomUUID(), name: taskName, isDone: false};
+        const newTask = {id: crypto.randomUUID(), name: taskName, isDone: false, day: null};
         dispatch(addTask(newTask));
         reset();
     }

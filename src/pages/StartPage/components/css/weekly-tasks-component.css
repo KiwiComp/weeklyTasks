@@ -10,12 +10,15 @@
 }
 
 .displayDoneWeeklyTasks {
-    text-decoration: line-through;
+    
     /* LIGHT MODE */
     /* background-color: rgb(218, 218, 218); */
     /* DARK MODE */
     background-color: rgb(83, 83, 83);
-    
+}
+
+.displayDoneWeeklyTasks .taskName {
+    text-decoration: line-through;
 }
 
 .displayNotDoneWeeklyTasks {
@@ -28,6 +31,13 @@
 .taskName {
     /* DARK MODE */
     color: rgb(42, 42, 42) !important; 
+}
+
+.dayOfExecution {
+    font-style: italic;
+    margin-top: 0.6rem;
+    /* text-align: center; */
+    font-size: 0.9rem;
 }
 
 .singleTask {
