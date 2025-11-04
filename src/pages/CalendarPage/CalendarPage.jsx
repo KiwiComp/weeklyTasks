@@ -16,7 +16,7 @@ function CalendarPage() {
                 {previousWeeks.map((week) => (
                     <Link to="/archive" state={{week}}>
                         <article className='archiveSingleWeek'>
-                            <p>Vecka {week.weekNumber}, {week.year}</p>
+                            <p>Vecka {week.weekNumber-1}, {week.year}</p>
                             <FontAwesomeIcon icon={faChevronRight}/>
                         </article>
                     </Link>
